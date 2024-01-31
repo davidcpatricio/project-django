@@ -64,16 +64,20 @@
   </div>
 
   {% if not is_detail_page %}
-  <footer class="recipe-footer">
-    <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:recipe' recipe.id %}">
-      <i class="fa-solid fa-eye"></i>
-      <span>See more...</span>
-    </a>
-  </footer>
+    <footer class="recipe-footer">
+      <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:recipe' recipe.id %}">
+        <i class="fa-solid fa-eye"></i>
+        <span>See more...</span>
+      </a>
+    </footer>
   {% else %}
-  <div class="preparation-steps">
-    {{ recipe.preparation_steps|linebreaksbr }}
-  </div>
+    <div class="preparation-steps">
+      {% if recipe.preparation_steps_is_html %}
+        {{ recipe.preparation_steps|safe }}
+      {% else %}
+        {{ recipe.preparation_steps|linebreaksbr }}
+      {% endif %}
+    </div>
   {% endif %}
 
 </div>
