@@ -37,7 +37,7 @@ def recipe(request, id):
 
 
 def search(request):
-    search_value = request.GET.get('q')
+    search_value = request.GET.get('q', '').strip()
 
     if not search_value:
         raise Http404()
