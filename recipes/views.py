@@ -44,8 +44,11 @@ def search(request):
         raise Http404()
 
     recipes = Recipe.objects.filter(
-        Q(title__icontains=search_value) |
-        Q(description__icontains=search_value)
+        Q(
+            Q(title__icontains=search_value) |
+            Q(description__icontains=search_value)
+        ),
+        is_published=True
     ).order_by('-id')
 
     return render(request, 'recipes/pages/search.html', {
