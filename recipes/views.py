@@ -42,4 +42,7 @@ def search(request):
     if not search_value:
         raise Http404()
 
-    return render(request, 'recipes/pages/search.html')
+    return render(request, 'recipes/pages/search.html', {
+        'page_title': f'Search | "{search_value}" | ',
+        'search_value': search_value,
+    })
